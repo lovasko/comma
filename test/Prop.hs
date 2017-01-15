@@ -9,7 +9,7 @@ newtype CSV = CSV [[T.Text]] deriving (Show)
 -- | Generate the content of a field.
 genField :: Gen T.Text
 genField = fmap T.pack (replicateM 5 $ elements alphabet)
-  where alphabet = ['a'..'z'] ++ ['A'..'Z'] ++ "\"\n" 
+  where alphabet = ['a'..'z'] ++ ['A'..'Z'] ++ "\"\n"
 
 -- | Random-generated instances of CSV.
 instance Arbitrary CSV where
@@ -25,7 +25,7 @@ chunksOf :: Int   -- ^ chunk length
          -> [[a]] -- ^ list of chunks
 chunksOf _ [] = [[]]
 chunksOf n xs = take n xs : chunksOf n (drop n xs)
-  
+
 -- | The 'comma' and 'uncomma' function have to form identity when composed.
 test :: CSV  -- ^ CSV table
      -> Bool -- ^ result
