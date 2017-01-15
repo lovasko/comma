@@ -17,7 +17,6 @@ module Text.Comma
 ) where
 
 import Control.Applicative
-import Control.Monad
 import Data.List
 import qualified Data.Attoparsec.Text as A
 import qualified Data.Text as T
@@ -42,9 +41,10 @@ comma text = A.parseOnly table (T.stripEnd text)
 -- | Render a table of texts into a valid CSV output.
 uncomma :: [[T.Text]] -- ^ table
         -> T.Text     -- ^ CSV text
-uncomma table = T.unlines (map convRecord table)
+uncomma = T.unlines . map (\r -> T.concat $ intersperse "," (map conv r))
   where
-    convRecord r = T.concat $ intersperse (T.singleton ',') (map convField r)
-    convField f 
-      | elem '"' (T.unpack f) = T.concat ["\"", T.replace "\"" "\"\"" f, "\""]
-      | otherwise             = f
+    isQuoted  = T.any (`elem` ['"', '\n', '\r'])
+    enquote x = T.concat ["\"", x, "\""]
+    conv f
+      | isQuoted f = enquote (T.replace "\"" "\"\"" f)
+      | otherwise  = f
