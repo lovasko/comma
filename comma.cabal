@@ -2,7 +2,7 @@ name:                comma
 version:             1.0.0
 synopsis:            CSV Parser & Producer
 description:         Comma is a simple CSV format parser and producer that
-                     closely follows the RFC4810 document.
+                     closely follows the RFC4180 document.
 homepage:            https://github.com/lovasko/comma
 license:             OtherLicense
 license-file:        LICENSE
