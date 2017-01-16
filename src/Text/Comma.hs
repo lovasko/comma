@@ -41,7 +41,7 @@ comma text = A.parseOnly table (T.stripEnd text)
 -- | Render a table of texts into a valid CSV output.
 uncomma :: [[T.Text]] -- ^ table
         -> T.Text     -- ^ CSV text
-uncomma = T.unlines . map (\r -> T.concat $ intersperse "," (map conv r))
+uncomma = T.unlines . map (T.concat . intersperse "," . map conv)
   where
     isQuoted  = T.any (`elem` ['"', '\n', '\r', ','])
     enquote x = T.concat ["\"", x, "\""]
