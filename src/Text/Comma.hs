@@ -43,7 +43,7 @@ uncomma :: [[T.Text]] -- ^ table
         -> T.Text     -- ^ CSV text
 uncomma = T.unlines . map (\r -> T.concat $ intersperse "," (map conv r))
   where
-    isQuoted  = T.any (`elem` ['"', '\n', '\r'])
+    isQuoted  = T.any (`elem` ['"', '\n', '\r', ','])
     enquote x = T.concat ["\"", x, "\""]
     conv f
       | isQuoted f = enquote (T.replace "\"" "\"\"" f)

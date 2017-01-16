@@ -9,7 +9,7 @@ newtype CSV = CSV [[T.Text]] deriving (Show)
 -- | Generate the content of a field.
 genField :: Gen T.Text
 genField = fmap T.pack (replicateM 5 $ elements alphabet)
-  where alphabet = ['a'..'z'] ++ ['A'..'Z'] ++ "\"\n"
+  where alphabet = ['a'..'z'] ++ ['A'..'Z'] ++ "\"\r\n,"
 
 -- | Random-generated instances of CSV.
 instance Arbitrary CSV where
