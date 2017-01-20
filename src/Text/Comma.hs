@@ -1,7 +1,7 @@
 {- |
 Module      : Text.Comma
 Description : CSV Parser & Producer
-Copyright   : (c) Daniel Lovasko, 2017
+Copyright   : (c) 2017 Daniel Lovasko
 License     : BSD2
 
 Maintainer  : Daniel Lovasko <daniel.lovasko@gmail.com>
