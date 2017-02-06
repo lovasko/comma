@@ -1,4 +1,6 @@
 # Text.Comma
+[![Build Status](https://travis-ci.org/lovasko/comma.svg?branch=master)](https://travis-ci.org/lovasko/comma)
+
 The `comma` package implements parsing and producing of the CSV format.
 
 ## Build & install
