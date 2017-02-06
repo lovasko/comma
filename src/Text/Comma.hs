@@ -33,10 +33,11 @@ field = fmap T.concat quoted <|> normal A.<?> "field"
 -- | Parse a block of text into a CSV table.
 comma :: T.Text                   -- ^ CSV text
       -> Either String [[T.Text]] -- ^ error | table
-comma text = A.parseOnly table (T.stripEnd text)
+comma text = A.parseOnly table fixEnd
   where
     table  = A.sepBy1 record A.endOfLine A.<?> "table"
     record = A.sepBy1 field (A.char ',') A.<?> "record"
+    fixEnd = maybe text id (T.stripSuffix "\n" text)
 
 -- | Render a table of texts into a valid CSV output.
 uncomma :: [[T.Text]] -- ^ table
