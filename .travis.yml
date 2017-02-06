@@ -23,5 +23,5 @@ install:
 - stack --no-terminal install
 
 script:
-- travis_wait stack build --pedantic
+- travis_wait stack build --pedantic --test
 - stack haddock
