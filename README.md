@@ -50,7 +50,7 @@ number = zipWith (:) (map (T.pack . show) [0..])
 
 main :: IO ()
 main = T.readFile "table.csv" >>= (\file -> case comma file of
-  Left err  -> T.putStrLn ("ERROR: " <> T.pack err)           >> exitFailure
+  Left  err -> T.putStrLn ("ERROR: " <> T.pack err)           >> exitFailure
   Right csv -> T.writeFile "table.csv" (uncomma $ number csv) >> exitSuccess)
 ```
 
@@ -69,8 +69,14 @@ $ ./number && cat table.csv
 ```
 
 ## Standards
-Both producing and parsing of CSV files strictly follows the
-[RFC4180](https://tools.ietf.org/html/rfc4180) document.
+Both producing and parsing of CSV files closely follows the
+[RFC4180](https://tools.ietf.org/html/rfc4180) document. The `comma`
+implementation has made the following decisions:
+ * record separator is always only `\n` ('\r` is not recognized as a newline
+   symbol)
+ * it is not required for the last record to be trailed with a `\n`. This
+   means that `comma "hello\nworld" == comma "hello\nworld\n" == Right
+   [["hello"], ["world"]]`
 
 ## License
 The `comma` package is licensed under the terms of the [2-clause BSD
